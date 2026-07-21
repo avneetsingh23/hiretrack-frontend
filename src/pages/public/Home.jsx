@@ -1,12 +1,16 @@
+import Hero from "../../components/common/Hero";
+import Stats from "../../components/common/Stats";
+import Features from "../../components/common/Features";
+import JobPreview from "../../components/common/JobPreview";
+
 function Home() {
     return (
-        <div className="text-center mt-5">
-            <h1 className="text-primary">Welcome to HireTrack 🚀</h1>
-
-            <p className="lead">
-                Find your dream job or hire top talent.
-            </p>
-        </div>
+        <>
+            <Hero />
+            <Stats />
+            <Features />
+            <JobPreview />
+        </>
     );
 }
 
