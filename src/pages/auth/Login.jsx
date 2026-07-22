@@ -1,8 +1,11 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import { FaEnvelope, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
+import { toast } from "react-toastify";
+import axios from "../../api/axiosConfig";
 
 function Login() {
+    const navigate = useNavigate();
 
     const [showPassword, setShowPassword] = useState(false);
 
@@ -23,11 +26,41 @@ function Login() {
 
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
 
         e.preventDefault();
 
-        console.log(formData);
+        try {
+
+            const response = await axios.post("/auth/login", {
+
+                email: formData.email,
+                password: formData.password
+
+            });
+
+            // JWT Token Save
+            localStorage.setItem("token", response.data.data);
+
+            // Success Message
+            toast.success(response.data.message);
+
+            // Redirect
+            navigate("/");
+
+        } catch (error) {
+
+            if (error.response) {
+
+                toast.error(error.response.data.message);
+
+            } else {
+
+                toast.error("Server Error");
+
+            }
+
+        }
 
     };
 
