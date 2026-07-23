@@ -33,33 +33,39 @@ function Login() {
         try {
 
             const response = await axios.post("/auth/login", {
-
                 email: formData.email,
                 password: formData.password
-
             });
 
-            // JWT Token Save
-            localStorage.setItem("token", response.data.data);
+            // Save JWT Token
+            localStorage.setItem("token", response.data.data.token);
+
+            // Save User Role
+            localStorage.setItem("role", response.data.data.role);
 
             // Success Message
             toast.success(response.data.message);
 
-            // Redirect
-            navigate("/");
+            // Redirect Home Page
+            setTimeout(() => {
+                navigate("/");
+            }, 1000)
+            setFormData({
+                email: "",
+                password: "",
+                remember: false,
+            });
 
         } catch (error) {
 
-            if (error.response) {
+            setFormData((prev) => ({
+                ...prev,
+                password: "",
+            }));
 
-                toast.error(error.response.data.message);
-
-            } else {
-
-                toast.error("Server Error");
-
-            }
-
+            toast.error(
+                error.response?.data?.message || "Invalid Email or Password"
+            );
         }
 
     };
@@ -86,7 +92,7 @@ function Login() {
                             <div className="text-center mb-4">
 
                                 <h2 className="fw-bold">
-                                    Welcome Back 👋
+                                    Welcome Back
                                 </h2>
 
                                 <p className="text-muted">
