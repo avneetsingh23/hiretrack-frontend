@@ -48,7 +48,7 @@ function Login() {
 
             // Redirect Home Page
             setTimeout(() => {
-                navigate("/");
+                navigate("/candidate");
             }, 1000)
             setFormData({
                 email: "",

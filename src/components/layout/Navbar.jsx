@@ -1,7 +1,24 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaBriefcase } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 function Navbar() {
+
+    const navigate = useNavigate();
+
+    const token = localStorage.getItem("token");
+
+    const handleLogout = () => {
+
+        localStorage.removeItem("token");
+        localStorage.removeItem("role");
+
+        toast.success("Logout Successful");
+
+        navigate("/login");
+
+    };
+
     return (
         <nav
             className="navbar navbar-expand-lg navbar-dark sticky-top shadow"
@@ -63,19 +80,39 @@ function Navbar() {
 
                     <div>
 
-                        <Link
-                            to="/login"
-                            className="btn btn-outline-light me-2"
-                        >
-                            Login
-                        </Link>
+                        {!token ? (
+                            <>
+                                <Link
+                                    to="/login"
+                                    className="btn btn-outline-light me-2"
+                                >
+                                    Login
+                                </Link>
 
-                        <Link
-                            to="/register"
-                            className="btn btn-warning"
-                        >
-                            Register
-                        </Link>
+                                <Link
+                                    to="/register"
+                                    className="btn btn-warning"
+                                >
+                                    Register
+                                </Link>
+                            </>
+                        ) : (
+                            <>
+                                <Link
+                                    to="/candidate"
+                                    className="btn btn-outline-light me-2"
+                                >
+                                    Dashboard
+                                </Link>
+
+                                <button
+                                    className="btn btn-danger"
+                                    onClick={handleLogout}
+                                >
+                                    Logout
+                                </button>
+                            </>
+                        )}
 
                     </div>
 

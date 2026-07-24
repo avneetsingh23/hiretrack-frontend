@@ -13,6 +13,9 @@ import ForgotPassword from "../pages/auth/ForgotPassword";
 import VerifyOtp from "../pages/auth/VerifyOtp";
 import ResetPassword from "../pages/auth/ResetPassword";
 
+import ProtectedRoute from "../components/ProtectedRoute";
+import CandidateDashboard from "../pages/user/CandidateDashboard";
+
 function AppRoutes() {
 
     return (
@@ -33,6 +36,14 @@ function AppRoutes() {
                 <Route path="forgot-password" element={<ForgotPassword />} />
                 <Route path="verify-otp" element={<VerifyOtp />} />
                 <Route path="reset-password" element={<ResetPassword />} />
+                <Route
+                    path="candidate"
+                    element={
+                        <ProtectedRoute>
+                            <CandidateDashboard />
+                        </ProtectedRoute>
+                    }
+                />
 
             </Route>
 
