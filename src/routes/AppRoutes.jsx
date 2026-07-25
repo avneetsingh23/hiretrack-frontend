@@ -2,6 +2,10 @@ import { Routes, Route } from "react-router-dom";
 
 import Layout from "../components/layout/Layout";
 
+import CandidateLayout from "../pages/user/CandidateLayout";
+import ProtectedRoute from "../components/ProtectedRoute";
+import CandidateDashboard from "../pages/user/CandidateDashboard";
+
 import Home from "../pages/public/Home";
 import Jobs from "../pages/public/Jobs";
 import About from "../pages/public/About";
@@ -13,8 +17,7 @@ import ForgotPassword from "../pages/auth/ForgotPassword";
 import VerifyOtp from "../pages/auth/VerifyOtp";
 import ResetPassword from "../pages/auth/ResetPassword";
 
-import ProtectedRoute from "../components/ProtectedRoute";
-import CandidateDashboard from "../pages/user/CandidateDashboard";
+
 
 function AppRoutes() {
 
@@ -40,10 +43,12 @@ function AppRoutes() {
                     path="candidate"
                     element={
                         <ProtectedRoute>
-                            <CandidateDashboard />
+                            <CandidateLayout />
                         </ProtectedRoute>
                     }
-                />
+                >
+                    <Route index element={<CandidateDashboard />} />
+                </Route>
 
             </Route>
 
