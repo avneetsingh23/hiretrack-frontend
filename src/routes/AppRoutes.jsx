@@ -6,6 +6,8 @@ import CandidateLayout from "../pages/user/CandidateLayout";
 import ProtectedRoute from "../components/ProtectedRoute";
 import CandidateDashboard from "../pages/user/CandidateDashboard";
 
+import Profile from "../pages/user/Profile";
+
 import Home from "../pages/public/Home";
 import Jobs from "../pages/public/Jobs";
 import About from "../pages/public/About";
@@ -48,6 +50,10 @@ function AppRoutes() {
                     }
                 >
                     <Route index element={<CandidateDashboard />} />
+                    <Route
+                        path="profile"
+                        element={<Profile />}
+                    />
                 </Route>
 
             </Route>

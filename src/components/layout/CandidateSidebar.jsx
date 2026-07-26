@@ -1,6 +1,17 @@
-import { Link } from "react-router-dom";
+
+import { Link, useNavigate } from "react-router-dom";
 
 function CandidateSidebar() {
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+
+        localStorage.removeItem("token");
+        localStorage.removeItem("role");
+
+        navigate("/login");
+
+    };
 
     return (
 
@@ -46,6 +57,16 @@ function CandidateSidebar() {
                     >
                         Applied Jobs
                     </Link>
+                </li>
+                <li className="nav-item mt-4">
+
+                    <button
+                        className="btn btn-danger w-100"
+                        onClick={handleLogout}
+                    >
+                        Logout
+                    </button>
+
                 </li>
 
             </ul>
