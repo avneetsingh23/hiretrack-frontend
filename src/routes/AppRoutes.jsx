@@ -6,6 +6,13 @@ import CandidateLayout from "../pages/user/CandidateLayout";
 import ProtectedRoute from "../components/ProtectedRoute";
 import CandidateDashboard from "../pages/user/CandidateDashboard";
 
+import RecruiterLayout from "../pages/recruiter/RecruiterLayout";
+import RecruiterDashboard from "../pages/recruiter/RecruiterDashboard";
+import AddJob from "../pages/recruiter/AddJob";
+import MyJobs from "../pages/recruiter/MyJobs";
+import EditJob from "../pages/recruiter/EditJob";
+import Applicants from "../pages/recruiter/Applicants";
+
 import AppliedJobs from "../pages/user/AppliedJobs";
 import Profile from "../pages/user/Profile";
 
@@ -61,6 +68,41 @@ function AppRoutes() {
                         path="applications"
                         element={<AppliedJobs />}
                     />
+                </Route>
+                <Route
+                    path="recruiter"
+                    element={
+                        <ProtectedRoute>
+                            <RecruiterLayout />
+                        </ProtectedRoute>
+                    }
+                >
+
+                    <Route
+                        index
+                        element={<RecruiterDashboard />}
+                    />
+
+                    <Route
+                        path="add-job"
+                        element={<AddJob />}
+                    />
+
+                    <Route
+                        path="my-jobs"
+                        element={<MyJobs />}
+                    />
+
+                    <Route
+                        path="edit-job/:id"
+                        element={<EditJob />}
+                    />
+
+                    <Route
+                        path="applicants/:jobId"
+                        element={<Applicants />}
+                    />
+
                 </Route>
 
 

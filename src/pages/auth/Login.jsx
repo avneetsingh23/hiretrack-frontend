@@ -46,10 +46,29 @@ function Login() {
             // Success Message
             toast.success(response.data.message);
 
-            // Redirect Home Page
             setTimeout(() => {
-                navigate("/candidate");
-            }, 1000)
+
+                const role = response.data.data.role;
+
+                if (role === "USER") {
+
+                    navigate("/candidate");
+
+                } else if (role === "RECRUITER") {
+
+                    navigate("/recruiter");
+
+                } else {
+
+                    toast.error("Admin panel is not available.");
+
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("role");
+
+                    navigate("/login");
+                }
+
+            }, 1000);
             setFormData({
                 email: "",
                 password: "",
