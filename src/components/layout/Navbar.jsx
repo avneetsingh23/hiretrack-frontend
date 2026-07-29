@@ -7,6 +7,7 @@ function Navbar() {
     const navigate = useNavigate();
 
     const token = localStorage.getItem("token");
+    const role = localStorage.getItem("role");
 
     const handleLogout = () => {
 
@@ -99,7 +100,11 @@ function Navbar() {
                         ) : (
                             <>
                                 <Link
-                                    to="/candidate"
+                                    to={
+                                        role === "RECRUITER"
+                                            ? "/recruiter"
+                                            : "/candidate"
+                                    }
                                     className="btn btn-outline-light me-2"
                                 >
                                     Dashboard
